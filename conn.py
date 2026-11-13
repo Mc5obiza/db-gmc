@@ -6,13 +6,13 @@ def open_conn(DB_FILE):
     yield conn
     conn.close()
     print('connevtion closed')
-def select_all():
+def see_tables():
     with open_conn("app.db") as conn:
         cursor = conn.execute("""
-        Select *
-        from users
+        Select name
+        from sqlite_schema
+        where type = 'table'
         """)
         rows = cursor.fetchall()
         print(rows)
-    input("Your name")
-select_all()
+see_tables()
